@@ -19,4 +19,12 @@ public class Userservice {
     }
 
     public String getUserpasswordByname(String name){return repository.findpassword(name);}
+
+    public User updateUser(User user){
+        User existinguser= repository.findByName(user.getName());
+        existinguser.setName(user.getName());
+        existinguser.setEmail(user.getEmail());
+        existinguser.setPassword(user.getPassword());
+        return repository.save(existinguser);
+    }
 }

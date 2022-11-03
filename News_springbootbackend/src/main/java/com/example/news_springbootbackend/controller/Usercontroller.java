@@ -24,8 +24,14 @@ public class Usercontroller {
         return service.getUserpasswordByname(name);
     }
 
+    @CrossOrigin(origins="http://localhost/3000")
     @PostMapping("/addUser")
     public User addUser(@RequestBody User user){
         return  service.saveuser(user);
+    }
+
+    @PutMapping("/update/{name}")
+    public  User updateUser(@RequestBody User user){
+        return service.updateUser(user);
     }
 }

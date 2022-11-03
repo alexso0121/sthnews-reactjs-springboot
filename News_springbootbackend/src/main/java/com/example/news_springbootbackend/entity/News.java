@@ -6,21 +6,23 @@ import lombok.NoArgsConstructor;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @javax.persistence.Entity
-@Table(name = "User")
-public class User {
+@Table(name = "news_records")
+public class News {
 
     @Id
     @GeneratedValue
     private long id;
-    private String name;
-    private String password;
-    private String email;
-    private String status;
-
+    private int user_id;
+    private String title;
+    private String Url;
+    private String content;
+    private String image;
+    private LocalDate date;
 
 }
