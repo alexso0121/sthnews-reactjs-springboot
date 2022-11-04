@@ -17,9 +17,10 @@ public class News {
 
     @Id
     @GeneratedValue
-    private long id;
+    private int id;
     private int user_id;
     private String title;
+    private String description;
     private String Url;
     private String content;
     private String image;

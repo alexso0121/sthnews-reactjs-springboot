@@ -1,6 +1,7 @@
 package com.example.news_springbootbackend.service;
 
 import com.example.news_springbootbackend.entity.News;
+import com.example.news_springbootbackend.entity.Store;
 import com.example.news_springbootbackend.respository.Newsrepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,6 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class Newsservice {
@@ -22,9 +25,12 @@ public class Newsservice {
             //final Elements description_ele =document.getElementsByClass("ssrcss-1q0x1qg-Paragraph eq5iqo00");
             final Elements contents =document.getElementsByClass("ssrcss-1q0x1qg-Paragraph eq5iqo00");
             for (Element content:contents){
-                paragraph+=content.text()+"\n";
+                paragraph+=content.text();
             }
             return paragraph;
+
+
+            //return contents.text();
 
         }catch (Exception ex){
             return "Error";
@@ -32,12 +38,18 @@ public class Newsservice {
 
     }
 
-    public News savenews(News news){
+    public int savenews(News news){
         String paragraph=content(news.getUrl());
-        news.setUrl(paragraph);
-        System.out.println(news);
-        return news;
+        news.setContent(paragraph);
+        News storednews=repository.save(news);
+        return storednews.getId();
+    }
+    public News getnews(int id){
+        return repository.findById(id).orElse(null);
     }
 
+    public List<News> gethistory(int userid){
+        return repository.findbyuserid(userid);
+    }
 
 }
