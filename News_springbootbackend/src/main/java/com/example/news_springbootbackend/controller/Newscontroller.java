@@ -29,4 +29,10 @@ public class Newscontroller {
     public List<News> gethistory(@PathVariable int userid){
         return service.gethistory(userid);
     }
+
+    @DeleteMapping("deletehistory/{user_id}")
+    public String deletehistory(@PathVariable int user_id){
+         service.deleteallhistory(user_id);
+         return "All History has been Deleted";
+    }
 }

@@ -1,7 +1,7 @@
 package com.example.news_springbootbackend.service;
 
 import com.example.news_springbootbackend.entity.News;
-import com.example.news_springbootbackend.entity.Store;
+
 import com.example.news_springbootbackend.respository.Newsrepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -37,10 +37,18 @@ public class Newsservice {
         }
 
     }
+    public List<News> gettitlenews(String title){
+        return repository.getsinglenews(title);
+    }
 
     public int savenews(News news){
         String paragraph=content(news.getUrl());
         news.setContent(paragraph);
+        for (News singlenews:gettitlenews(news.getTitle())){
+            if (singlenews.getTitle().equals(news.getTitle())&&singlenews.getUser_id()==news.getUser_id()){
+                return singlenews.getId();
+            }
+        }
         News storednews=repository.save(news);
         return storednews.getId();
     }
@@ -50,6 +58,10 @@ public class Newsservice {
 
     public List<News> gethistory(int userid){
         return repository.findbyuserid(userid);
+    }
+
+    public String deleteallhistory(int user_id){
+        return repository.deleteallstored(user_id);
     }
 
 }

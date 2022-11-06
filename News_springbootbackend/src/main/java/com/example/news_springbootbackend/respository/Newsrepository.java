@@ -13,4 +13,9 @@ public interface Newsrepository extends JpaRepository<News,Integer> {
 
     @Query(value="SELECT * FROM news_records WHERE user_id=?1 ORDER BY id DESC",nativeQuery = true)
     List<News> findbyuserid(int userid);
+    @Query(value = "SELECT * FROM news_records Where title=?1",nativeQuery = true)
+    List<News> getsinglenews(String title);
+
+    @Query(value="delete from news_records where user_id=?1",nativeQuery = true)
+    String deleteallstored(int user_id);
 }
