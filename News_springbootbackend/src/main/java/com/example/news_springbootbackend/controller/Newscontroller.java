@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://master.d23osv0bbzg74s.amplifyapp.com/")
 public class Newscontroller {
     @Autowired
     private Newsservice service;
 
-    @PostMapping("/clicknews")
-    public int storenews(@RequestBody News news){
-        return service.savenews(news);
+    @GetMapping("/shownews")
+    public List<News> storenews(){
+        return service.getarticles();
     }
 
     @GetMapping("/getnews/{id}")

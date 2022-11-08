@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -18,4 +19,6 @@ public interface Newsrepository extends JpaRepository<News,Integer> {
 
     @Query(value="delete from news_records where user_id=?1",nativeQuery = true)
     String deleteallstored(int user_id);
+    @Query(value="SELECT * from news_records where date=?1",nativeQuery = true)
+    List<News> getnewsbydate(LocalDate today);
 }

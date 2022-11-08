@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://master.d23osv0bbzg74s.amplifyapp.com")
 public class Usercontroller {
 
     @Autowired
@@ -18,13 +18,13 @@ public class Usercontroller {
         return service.getUserByname(name);
     }
 
-    @CrossOrigin(origins="http://localhost/3000")
+    @CrossOrigin(origins="https://master.d23osv0bbzg74s.amplifyapp.com")
     @GetMapping("/password/{name}")
     public String findUserpassword(@PathVariable String name){
         return service.getUserpasswordByname(name);
     }
 
-    @CrossOrigin(origins="http://localhost/3000")
+    @CrossOrigin(origins="https://master.d23osv0bbzg74s.amplifyapp.com")
     @PostMapping("/addUser")
     public User addUser(@RequestBody User user){
         return  service.saveuser(user);
