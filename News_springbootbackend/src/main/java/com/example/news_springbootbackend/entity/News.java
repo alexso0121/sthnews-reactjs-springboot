@@ -24,5 +24,6 @@ public class News {
     private String content;
     private String image;
     private LocalDate date;
+    private int category;
 
 }
