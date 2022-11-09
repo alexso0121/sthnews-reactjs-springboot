@@ -32,12 +32,12 @@ public class Newsservice {
 
 
 //get method to get a list of news
-    public List<News>  getarticles() {
+    public List<News>  getarticles(int category) {
 
-        if(repository.getnewsbydate(today).size()==0){
-           return repository.getnewsbydate(today.minusDays(1));
+        if(repository.getnewsbydate(today,category).size()==0){
+           return repository.getnewsbydate(today.minusDays(1),category);
         }
-        return repository.getnewsbydate(today);
+        return repository.getnewsbydate(today,category);
 
 
     }

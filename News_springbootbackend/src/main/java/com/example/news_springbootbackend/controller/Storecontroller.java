@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://master.d23osv0bbzg74s.amplifyapp.com")
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://master.d23osv0bbzg74s.amplifyapp.com/")
 public class Storecontroller {
     @Autowired
     private Storeservice service;
 
 
 
-    @CrossOrigin(origins = "https://master.d23osv0bbzg74s.amplifyapp.com")
+    //@CrossOrigin(origins = "https://master.d23osv0bbzg74s.amplifyapp.com")
     @PostMapping("/addstore")
     public Store addstore(@RequestBody Store store){
         return service.addstore(store);

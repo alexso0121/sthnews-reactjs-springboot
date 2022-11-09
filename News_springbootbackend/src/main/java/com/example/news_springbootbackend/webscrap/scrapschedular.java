@@ -12,27 +12,39 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class scrapschedular {
-    private static LocalDate today=LocalDate.now();
-    private static  LocalDateTime now=LocalDateTime.now();
+
+
 
     @Autowired
     private Newsrepository repository;
 
-    @Scheduled(cron="0 1 0 * * ?",zone = "Hongkong")
-    //@Scheduled(fixedRate = 200000L)
+    //@Scheduled(cron="0 15 0 * * ?",zone = "Hongkong")
+    @Scheduled(fixedRate = 86400*1000L)
     public void timer(){
-        final String url="https://www.bbc.com/news";
+        LocalDateTime now=LocalDateTime.now();
+         LocalDate today=LocalDate.now();
+        final String base_urls="https://www.bbc.com/news";
+        ArrayList<String> urls=new ArrayList<String>(5);
+        final String[] s={base_urls,base_urls+"/world",base_urls+"/business",base_urls+"/technology",base_urls+"/entertainment_and_arts"};
+        for(String i:s){
+            urls.add(i);
+        }
+        for(String url:urls){
         try{
             final Document document= Jsoup.connect(url).get();
+            int category=urls.indexOf(url);
             final Elements links= document.getElementsByClass("gs-c-promo-heading gs-o-faux-block-link__overlay-link gel-pica-bold nw-o-link-split__anchor");
             int num=0;
+            Boolean repeated_news=false;
 
 
             for (Element link:links){
-                if(num>9){
+                if(num>7){
                     break;
                 }
                 News news=new News();
@@ -40,7 +52,19 @@ public class scrapschedular {
                 if(!real_url.startsWith("https")){
                     real_url="https://www.bbc.com/"+real_url;
                 }
-                articlecontent(real_url,news);
+                //if(!url.equals(base_urls)){
+                  //  List<News> today_topnews=repository.getnewsbydate(today);
+                    //for (News topnews:today_topnews){
+                      //  if(topnews.getUrl().equals(url)){
+                        //    repeated_news=true;
+                         //   break;
+                        //}
+                    //}
+                //}
+                if(repeated_news){
+                    break;
+                }
+                articlecontent(real_url,news,category);
                 num++;
 
             }
@@ -49,10 +73,11 @@ public class scrapschedular {
         }catch (Exception ex){
             System.out.println(ex);;
         }
-    }
-    private void articlecontent(String url, News news) {
+    }}
+    private void articlecontent(String url, News news,int category) {
         try {
-
+            LocalDateTime now=LocalDateTime.now();
+             LocalDate today=LocalDate.now();
             final Document document=Jsoup.connect(url).get();
             String paragraph="";
 
@@ -72,9 +97,11 @@ public class scrapschedular {
             news.setContent(paragraph);
             news.setDate(today);
             news.setUrl(url);
+            news.setCategory(category);
 
             if (news.getTitle()!=""){
                 repository.save(news);
             }
             System.out.println(now);
+            System.out.println(category);
 }catch(Exception ex){}}}
