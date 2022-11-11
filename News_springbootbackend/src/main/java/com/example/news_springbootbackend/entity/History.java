@@ -23,6 +23,7 @@ import java.time.LocalDate;
         private int user_id;
         private int news_id;
         private LocalDate date;
+        private String title;
 
 
 

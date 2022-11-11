@@ -11,7 +11,13 @@ public class Userservice {
     private Userrepository repository;
 
     public User saveuser(User user){
-        return repository.save(user);
+        if(repository.checkname(user.getName())!=null){
+            User emptyuser=new User();
+            return emptyuser;
+        }
+        User saveduser=repository.save(user);
+        saveduser.setPassword(null);
+        return saveduser;
     }
 
     public User getUserByname(String name){
@@ -21,6 +27,10 @@ public class Userservice {
     public String getUserpasswordByname(String name){return repository.findpassword(name);}
 
     public User updateUser(User user){
+        if(repository.checkname(user.getName())!=null){
+            User emptyuser=new User();
+            return emptyuser;
+        }
         User existinguser= repository.findByName(user.getName());
         existinguser.setName(user.getName());
         existinguser.setEmail(user.getEmail());

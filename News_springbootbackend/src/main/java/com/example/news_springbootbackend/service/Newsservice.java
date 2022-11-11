@@ -20,7 +20,6 @@ import java.util.List;
 public class Newsservice {
     @Autowired
     private Newsrepository repository;
-    private static LocalDate today=LocalDate.now();
 
 
 
@@ -33,6 +32,7 @@ public class Newsservice {
 
 //get method to get a list of news
     public List<News>  getarticles(int category) {
+        LocalDate today=LocalDate.now();
 
         if(repository.getnewsbydate(today,category).size()==0){
            return repository.getnewsbydate(today.minusDays(1),category);

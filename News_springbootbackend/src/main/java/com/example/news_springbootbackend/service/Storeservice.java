@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -21,6 +22,8 @@ public class Storeservice {
         if(getsinglestore(news_id)!=null){
             return null;
         }
+        LocalDate today=LocalDate.now();
+        store.setDate(today);
         return repository.save(store);
     }
 

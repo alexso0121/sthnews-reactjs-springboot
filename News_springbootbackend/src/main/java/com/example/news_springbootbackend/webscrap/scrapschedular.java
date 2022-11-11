@@ -24,8 +24,9 @@ public class scrapschedular {
     private Newsrepository repository;
 
     //@Scheduled(cron="0 15 0 * * ?",zone = "Hongkong")
-    @Scheduled(fixedRate = 86400*1000L)
+    //@Scheduled(fixedRate = 86400*1000L)
     public void timer(){
+        System.out.println("Start scraping news");
         LocalDateTime now=LocalDateTime.now();
          LocalDate today=LocalDate.now();
         final String base_urls="https://www.bbc.com/news";
@@ -41,7 +42,7 @@ public class scrapschedular {
             final Elements links= document.getElementsByClass("gs-c-promo-heading gs-o-faux-block-link__overlay-link gel-pica-bold nw-o-link-split__anchor");
             int num=0;
             Boolean repeated_news=false;
-
+            ArrayList<String> array=new ArrayList<String>();
 
             for (Element link:links){
                 if(num>7){
@@ -49,23 +50,20 @@ public class scrapschedular {
                 }
                 News news=new News();
                 String real_url=link.attr("href");
+                if(array.contains(real_url)){
+                    System.out.println("repeated");
+                    continue;
+                }else{num++;}
+                array.add(real_url);
                 if(!real_url.startsWith("https")){
                     real_url="https://www.bbc.com/"+real_url;
                 }
-                //if(!url.equals(base_urls)){
-                  //  List<News> today_topnews=repository.getnewsbydate(today);
-                    //for (News topnews:today_topnews){
-                      //  if(topnews.getUrl().equals(url)){
-                        //    repeated_news=true;
-                         //   break;
-                        //}
-                    //}
-                //}
-                if(repeated_news){
+
+               if(repeated_news){
                     break;
                 }
                 articlecontent(real_url,news,category);
-                num++;
+                //num++;
 
             }
             //System.out.println(paragraph);

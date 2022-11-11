@@ -17,6 +17,6 @@ public interface Newsrepository extends JpaRepository<News,Integer> {
     List<News> getsinglenews(String title);
 
 
-    @Query(value="SELECT * from news_records where date=?1 AND category=?2",nativeQuery = true)
+    @Query(value="SELECT * from news_records where date=?1 AND category=?2 Order by id",nativeQuery = true)
     List<News> getnewsbydate(LocalDate today,int category);
 }

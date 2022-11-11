@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import java.time.LocalDate;
 
 
 @Data
@@ -23,6 +23,7 @@ public class Store {
         private int user_id;
         private int news_id;
         private String title;
+        private LocalDate date;
 
 
 

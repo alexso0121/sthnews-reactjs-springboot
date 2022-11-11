@@ -26,8 +26,11 @@ public class Historyservice {
     }
 
     public News getsinglenews(History history) {
+
         int requested_news_id=history.getNews_id();
-        repository.save(history);
+        History old_history=repository.haveidenticalhis(history.getUser_id(), history.getTitle());
+        if(old_history==null){
+        repository.save(history);}
         return newsservice.getarticlebyid(requested_news_id);
 
     }
