@@ -85,7 +85,7 @@ public class scrapschedular {
             final Elements contents=document.getElementsByClass("ssrcss-1q0x1qg-Paragraph eq5iqo00");
             for (Element content:contents){
 
-                paragraph+=content.text()+"\n";
+                paragraph+=content.text()+"/n/";
 
             }
             //System.out.println(image.attr("src"));

@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "https://www.sosthweb.com/")
 //@CrossOrigin(origins = "https://master.d23osv0bbzg74s.amplifyapp.com/")
 public class Newscontroller {
     @Autowired
     private Newsservice service;
-    @CrossOrigin(origins = "http://localhost:3000/")
+    @CrossOrigin(origins = "https://www.sosthweb.com/")
     @GetMapping("/shownews/{category}")
     public List<News> storenews(@PathVariable int category){
         return service.getarticles(category);
