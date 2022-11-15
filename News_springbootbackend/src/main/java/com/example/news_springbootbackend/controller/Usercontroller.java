@@ -21,8 +21,8 @@ public class Usercontroller {
 
    // @CrossOrigin(origins="https://master.d23osv0bbzg74s.amplifyapp.com")
     @GetMapping("/password/{name}")
-    public String findUserpassword(@PathVariable String name){
-        return service.getUserpasswordByname(name);
+    public User findUserpassword(@PathVariable String name){
+        return service.getUserByname(name);
     }
 
    // @CrossOrigin(origins="https://master.d23osv0bbzg74s.amplifyapp.com")

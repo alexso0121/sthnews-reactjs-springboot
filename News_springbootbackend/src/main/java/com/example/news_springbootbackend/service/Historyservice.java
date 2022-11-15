@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+//For logic in handling Users' history
 @Service
 public class Historyservice {
     @Autowired

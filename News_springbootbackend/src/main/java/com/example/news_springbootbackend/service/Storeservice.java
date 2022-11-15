@@ -14,12 +14,13 @@ public class Storeservice {
     @Autowired
     private Storerepository repository;
 
-    public Store getsinglestore(int news_id){
-        return repository.getsinglestore(news_id);
+    public Store getsinglestore(int news_id,int user_id){
+        return repository.getsinglestore(news_id,user_id);
     }
     public Store addstore(Store store){
         int news_id=store.getNews_id();
-        if(getsinglestore(news_id)!=null){
+        int user_id= store.getUser_id();
+        if(getsinglestore(news_id,user_id)!=null){
             return null;
         }
         LocalDate today=LocalDate.now();

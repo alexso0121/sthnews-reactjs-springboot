@@ -5,6 +5,8 @@ import com.example.news_springbootbackend.respository.Userrepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class Userservice {
     @Autowired
@@ -24,7 +26,8 @@ public class Userservice {
         return repository.findByName(name);
     }
 
-    public String getUserpasswordByname(String name){return repository.findpassword(name);}
+    //public User getUserpasswordByname(String name){
+        //String password= repository.findpassword(name);}
 
     public User updateUser(User user){
         if(repository.checkname(user.getName())!=null){
@@ -37,4 +40,6 @@ public class Userservice {
         existinguser.setPassword(user.getPassword());
         return repository.save(existinguser);
     }
+    //@Transactional
+
 }

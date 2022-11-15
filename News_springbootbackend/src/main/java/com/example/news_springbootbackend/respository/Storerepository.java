@@ -12,8 +12,8 @@ import java.util.List;
 public interface Storerepository extends JpaRepository<Store,Integer> {
     @Query(value = "select * from store where user_id=?1 ORDER BY id DESC LIMIT 8",nativeQuery = true)
     List<Store> getstore(int user_id);
-    @Query(value="Select * from store where news_id=?1",nativeQuery = true)
-    Store getsinglestore(int news_id);
+    @Query(value="Select * from store where news_id=?1 AND user_id=?2 ",nativeQuery = true)
+    Store getsinglestore(int news_id ,int user_id);
 
     @Modifying
     @Query(value = "delete from store where user_id=?1",nativeQuery = true)
