@@ -5,9 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface Userrepository extends JpaRepository<User,Long> {
-    User findByName(String name);
+   Optional <User>  findByName(String name);
 
     @Query(value="Select password From user Where name=?1",nativeQuery = true)
     String findpassword(String name);

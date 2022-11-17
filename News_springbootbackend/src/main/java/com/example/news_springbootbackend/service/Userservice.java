@@ -23,7 +23,7 @@ public class Userservice {
     }
 
     public User getUserByname(String name){
-        return repository.findByName(name);
+        return repository.findByName(name).orElse(null);
     }
 
     //public User getUserpasswordByname(String name){
@@ -34,7 +34,7 @@ public class Userservice {
             User emptyuser=new User();
             return emptyuser;
         }
-        User existinguser= repository.findByName(user.getName());
+        User existinguser= repository.findByName(user.getName()).orElse(null);
         existinguser.setName(user.getName());
         existinguser.setEmail(user.getEmail());
         existinguser.setPassword(user.getPassword());
