@@ -20,7 +20,19 @@ public class User {
     private String name;
     private String password;
     private String email;
-    private String status;
+    private String roles;
+
+
+
+    @Override
+    public String toString() {
+        return "SecurityUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + roles + '\'' +
+                '}';
+    }
 
 
 }
