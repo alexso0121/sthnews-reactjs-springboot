@@ -42,7 +42,8 @@ public class SecurityConfig {
         return http
                 //if used csrf.ignoringAntMatchers -->prevent the attack from cross-origin
                 //.csrf(csrf -> csrf.disable())
-                .csrf(csrf -> csrf.ignoringAntMatchers("/shownews/**","/getnews/**","/token"))
+                .cors().and()
+                .csrf(csrf -> csrf.ignoringAntMatchers("/shownews/**","/getnews/**","/token","/signup"))
 
                 .authorizeRequests(auth-> auth
                         .antMatchers("/shownews/**").permitAll()
@@ -51,11 +52,11 @@ public class SecurityConfig {
 
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //sessionmanagement can direct the client to specific url if they have wrong pw
+                //Link to the jpauserservice to check whether the authentication valid (similar to authentication manager)
                 .userDetailsService(myUserDetailsService)
                 .headers(headers -> headers.frameOptions().sameOrigin())
                 .httpBasic(Customizer.withDefaults())
-                .formLogin().and()
+                //.formLogin().and()
                 .build();
     }
     @Bean

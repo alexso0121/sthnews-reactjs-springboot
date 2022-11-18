@@ -31,7 +31,7 @@ public class NewsSpringbootbackendApplication {
 
 
 		return args -> {
-			//users.save(new JpaUser("user2",encoder.encode("password2"),"ROLE_USER"));
+			//users.save(new JpaUser("user3",encoder.encode("password3"),"dfsdf","ROLE_USER"));
 			//users.save(new JpaUser("admin",encoder.encode("password"),"ROLE_USER,ROLE_ADMIN"));
 			//users.save(new Post("Hello, World!","hello-world","Welcome to my new blog!","Dan Vega"));
 

@@ -30,6 +30,7 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
                 ", role='" + roles + '\'' +
                 '}';
     }
