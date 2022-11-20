@@ -1,8 +1,7 @@
 package com.example.news_springbootbackend.controller;
 
 import com.example.news_springbootbackend.entity.JpaUser;
-import com.example.news_springbootbackend.entity.User;
-import com.example.news_springbootbackend.service.TokenService;
+import com.example.news_springbootbackend.service.JpaUserservice;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +13,9 @@ import org.slf4j.Logger;
 public class AuthController {
     private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
-    private final TokenService tokenService;
+    private final JpaUserservice tokenService;
 
-    public AuthController(TokenService tokenService) {
+    public AuthController(JpaUserservice tokenService) {
         this.tokenService = tokenService;
     }
 

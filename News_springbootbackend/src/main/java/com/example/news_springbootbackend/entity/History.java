@@ -3,6 +3,7 @@ package com.example.news_springbootbackend.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -23,7 +24,9 @@ import java.time.LocalDate;
         private String username;
         private int user_id;
 
-      //  @OneToOne(mappedBy = "History")
+
+        //@OneToOne(cascade = CascadeType.REMOVE)
+       // @JoinColumn(name="news_id",referencedColumnName = "id")
         private int news_id;
         private LocalDate date;
         private String title;

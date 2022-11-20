@@ -1,9 +1,11 @@
 package com.example.news_springbootbackend.service;
 
+import com.example.news_springbootbackend.Email.Emailsender;
 import com.example.news_springbootbackend.entity.JpaUser;
-import com.example.news_springbootbackend.entity.User;
 import com.example.news_springbootbackend.respository.JpaUserrepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,11 +18,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class TokenService {
+public class JpaUserservice {
     private final JwtEncoder encoder;
 
     private PasswordEncoder passwordEncoder;
@@ -29,7 +30,7 @@ public class TokenService {
     AuthenticationManager authenticationManager;
 
 
-    public TokenService(JwtEncoder jwtEncoder, PasswordEncoder passwordEncoder) {
+    public JpaUserservice(JwtEncoder jwtEncoder, PasswordEncoder passwordEncoder) {
         this.encoder = jwtEncoder;
         this.passwordEncoder = passwordEncoder;
     }
@@ -38,6 +39,9 @@ public class TokenService {
     private JpaUserrepository jpaUserrepository;
 
     private Authentication auth;
+
+    @Autowired
+    private Emailsender emailsender;
 
 
     public String generateToken (Authentication authentication){
@@ -52,6 +56,8 @@ public class TokenService {
                 .claim("scope",scope).build();
                 return this.encoder.encode(JwtEncoderParameters.from((claims))).getTokenValue();
     }
+
+
     public String signup(JpaUser jpaUser) {
         System.out.println(jpaUserrepository.findByUsername(jpaUser.getUsername()));
        if(jpaUserrepository.findByUsername(jpaUser.getUsername()).isPresent())
@@ -60,9 +66,18 @@ public class TokenService {
                 passwordEncoder.encode(jpaUser.getPassword()),jpaUser.getEmail(),jpaUser.getRoles()));
         Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 jpaUser.getUsername(),jpaUser.getPassword()));
-        //System.out.println(authentication);
+
         String token=generateToken(authentication);
-        //System.out.println(token);
+        emailsender.SendEmail(jpaUser.getEmail(),
+                "Successful Registration for STHNews ",
+                "Dear "+ jpaUser.getUsername()+":"+"\n"+"\n"+
+        "Congratulations!We are glad to notice that your have successfully registered to STH NEWS"+"\n"
+        +"Our website is a website for reading updated news and weathering forecast." +
+                        "Multiple function like store your own news," +
+                "watch for history can also be used after you have register.Feel free to contact us with this email\n \n"+
+                "Best Regards,\n"+
+                "Sth coop.");
+
        return token;
 
     }

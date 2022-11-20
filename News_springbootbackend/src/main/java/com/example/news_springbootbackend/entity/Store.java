@@ -23,6 +23,9 @@ public class Store {
        // @OneToOne
        // @JoinColumn(name="JpaUser_id")
         private int user_id;
+
+       // @OneToOne
+        //@JoinColumn(name="news_id",referencedColumnName = "id")
         private int news_id;
         private String title;
         private LocalDate date;

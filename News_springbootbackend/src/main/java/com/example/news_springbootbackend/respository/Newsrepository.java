@@ -25,6 +25,6 @@ public interface Newsrepository extends JpaRepository<News,Integer> {
     List<News> searchnews(String input);
 
     @Modifying
-    @Query(value = "DELETE FROM newsweb.news_records WHERE date<= ?1 AND isstore IS NULL",nativeQuery = true)
+    @Query(value = "DELETE FROM newsweb.news_records WHERE date<= ?1 AND isstored IS NULL",nativeQuery = true)
     void cleannews(LocalDate minusDays);
 }
