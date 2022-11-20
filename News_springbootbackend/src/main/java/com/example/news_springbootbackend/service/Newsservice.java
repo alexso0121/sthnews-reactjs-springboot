@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -57,4 +58,24 @@ public class Newsservice {
     }
 
 
+    public List<News> searchnews(String input) {
+        ArrayList<String> titles=new ArrayList<String>();
+        String modified_input="%"+input+"%";
+        List<News> foundnews= repository.searchnews(modified_input);
+        List<News> filternews=new ArrayList<News>();
+        int num=0;
+        for(News news:foundnews){
+            if(num==7){
+                break;
+            }
+            if(titles.contains(news.getTitle())){
+                continue;
+            }else {
+                titles.add(news.getTitle());
+                filternews.add(news);
+            }
+             num++;
+        }
+        return filternews;
+    }
 }

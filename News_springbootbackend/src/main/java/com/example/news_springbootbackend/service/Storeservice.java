@@ -1,8 +1,10 @@
 package com.example.news_springbootbackend.service;
 
 import com.example.news_springbootbackend.entity.JpaUser;
+import com.example.news_springbootbackend.entity.News;
 import com.example.news_springbootbackend.entity.Store;
 import com.example.news_springbootbackend.respository.JpaUserrepository;
+import com.example.news_springbootbackend.respository.Newsrepository;
 import com.example.news_springbootbackend.respository.Storerepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class Storeservice {
     @Autowired
     private JpaUserrepository jpaUserrepository;
 
+    @Autowired
+    private Newsrepository newsrepository;
+
     public Store getsinglestore(int news_id,int user_id){
         return repository.getsinglestore(news_id,user_id);
     }
@@ -30,6 +35,8 @@ public class Storeservice {
         if(getsinglestore(news_id,user_id)!=null){
             return null;
         }
+        News storednews=newsrepository.findById(news_id).orElse(null);
+        storednews.setIsstored("true");
         LocalDate today=LocalDate.now();
         store.setDate(today);
         return repository.save(store);

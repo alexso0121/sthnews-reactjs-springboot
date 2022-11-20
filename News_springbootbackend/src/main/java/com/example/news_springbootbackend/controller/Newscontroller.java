@@ -16,14 +16,22 @@ public class Newscontroller {
     @Autowired
     private Newsservice service;
     //@CrossOrigin(origins = "https://www.sosthweb.com/")
-    @GetMapping("/shownews/{category}")
-    public List<News> storenews(@PathVariable int category){
-        return service.getarticles(category);
+    @GetMapping("/shownews/{input}")
+    public List<News> storenews(@PathVariable String input){
+
+        try{
+            int category=Integer.parseInt(input);
+            return service.getarticles(category);}
+        catch (Exception exception){
+            return service.searchnews(input);
+        }
     }
 
     @GetMapping("/getnews/{id}")
     public News getnews(@PathVariable int id){
-        return service.getnews(id);
+
+            return service.getnews(id);
+
     }
 
 

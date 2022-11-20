@@ -19,10 +19,11 @@ import java.time.LocalDate;
         @GeneratedValue
         private int id;
 
-       // @OneToOne(fetch=FetchType.LAZY)
-       // @JoinColumn(name="JpaUser_id")
+
         private String username;
         private int user_id;
+
+      //  @OneToOne(mappedBy = "History")
         private int news_id;
         private LocalDate date;
         private String title;
