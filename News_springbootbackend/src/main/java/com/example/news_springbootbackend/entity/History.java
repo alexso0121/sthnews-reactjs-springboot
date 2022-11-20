@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 
@@ -20,6 +18,10 @@ import java.time.LocalDate;
         @Id
         @GeneratedValue
         private int id;
+
+       // @OneToOne(fetch=FetchType.LAZY)
+       // @JoinColumn(name="JpaUser_id")
+        private String username;
         private int user_id;
         private int news_id;
         private LocalDate date;

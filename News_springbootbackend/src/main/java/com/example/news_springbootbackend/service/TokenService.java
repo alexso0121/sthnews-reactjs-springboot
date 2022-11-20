@@ -1,8 +1,11 @@
 package com.example.news_springbootbackend.service;
 
 import com.example.news_springbootbackend.entity.JpaUser;
+import com.example.news_springbootbackend.entity.User;
 import com.example.news_springbootbackend.respository.JpaUserrepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +24,10 @@ public class TokenService {
     private final JwtEncoder encoder;
 
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
 
     public TokenService(JwtEncoder jwtEncoder, PasswordEncoder passwordEncoder) {
         this.encoder = jwtEncoder;
@@ -48,9 +55,20 @@ public class TokenService {
     public String signup(JpaUser jpaUser) {
         System.out.println(jpaUserrepository.findByUsername(jpaUser.getUsername()));
        if(jpaUserrepository.findByUsername(jpaUser.getUsername()).isPresent())
-        {return "repeated username";}
-        jpaUserrepository.save(new JpaUser(jpaUser.getUsername(),passwordEncoder.encode(jpaUser.getPassword()),jpaUser.getEmail(),jpaUser.getRoles()));
-        return "sign up success";
+        {return "repeated";}
+        JpaUser saveuser=jpaUserrepository.save(new JpaUser(jpaUser.getUsername(),
+                passwordEncoder.encode(jpaUser.getPassword()),jpaUser.getEmail(),jpaUser.getRoles()));
+        Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                jpaUser.getUsername(),jpaUser.getPassword()));
+        //System.out.println(authentication);
+        String token=generateToken(authentication);
+        //System.out.println(token);
+       return token;
 
+    }
+    public JpaUser getUserByname(String username){
+        JpaUser temp=jpaUserrepository.findByUsername(username).orElse(null);
+        temp.setPassword(null);
+        return temp;
     }
 }

@@ -16,14 +16,14 @@ public class Historycontroller {
     @Autowired
     private Historyservice service;
 
-    @DeleteMapping("deletehistory/{user_id}")
-    public String deletehistory(@PathVariable int user_id){
-        service.deleteallhistory(user_id);
+    @DeleteMapping("deletehistory/{username}")
+    public String deletehistory(@PathVariable int username){
+        service.deleteallhistory(username);
         return "All History has been Deleted";
     }
-    @GetMapping("/gethistory/{userid}")
-    public List<History> gethistory(@PathVariable int userid){
-        return service.gethistory(userid);
+    @GetMapping("/gethistory/{username}")
+    public List<History> gethistory(@PathVariable String username){
+        return service.gethistory(username);
     }
     @PostMapping("/clicknews")
     public News click(@RequestBody History history){

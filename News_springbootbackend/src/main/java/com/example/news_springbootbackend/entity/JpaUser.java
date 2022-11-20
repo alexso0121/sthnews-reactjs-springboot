@@ -1,16 +1,14 @@
 package com.example.news_springbootbackend.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "JpaUser")
 public class JpaUser {
 
     @Id @GeneratedValue
-    private Long id;
+   // @OneToOne(mappedBy = "JpaUser",fetch = FetchType.LAZY)
+    private int id;
     private String username;
     private String password;
 
@@ -28,11 +26,11 @@ public class JpaUser {
 
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

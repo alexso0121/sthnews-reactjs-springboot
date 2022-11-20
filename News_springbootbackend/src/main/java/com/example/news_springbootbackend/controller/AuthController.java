@@ -1,13 +1,11 @@
 package com.example.news_springbootbackend.controller;
 
 import com.example.news_springbootbackend.entity.JpaUser;
+import com.example.news_springbootbackend.entity.User;
 import com.example.news_springbootbackend.service.TokenService;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.slf4j.Logger;
 
@@ -35,9 +33,15 @@ public class AuthController {
 
     @PostMapping("/signup")
     public String signup(@RequestBody JpaUser jpaUser){
-        //LOG.debug("Token requested for user: '{}",authentication.getName());
+        LOG.debug("Token requested for user: '{}",jpaUser.getUsername());
         String token=tokenService.signup(jpaUser);
-        //LOG.debug("Token granted {}",token);
+        LOG.debug("Token granted {}",token);
         return token;
     }
+
+    @GetMapping("/jpauser/{username}")
+    public JpaUser findUserByName(@PathVariable String username){
+        return tokenService.getUserByname(username);
+    }
+
 }

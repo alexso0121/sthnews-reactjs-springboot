@@ -1,6 +1,8 @@
 package com.example.news_springbootbackend.service;
 
+import com.example.news_springbootbackend.entity.JpaUser;
 import com.example.news_springbootbackend.entity.Store;
+import com.example.news_springbootbackend.respository.JpaUserrepository;
 import com.example.news_springbootbackend.respository.Storerepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +16,16 @@ public class Storeservice {
     @Autowired
     private Storerepository repository;
 
+    @Autowired
+    private JpaUserrepository jpaUserrepository;
+
     public Store getsinglestore(int news_id,int user_id){
         return repository.getsinglestore(news_id,user_id);
     }
     public Store addstore(Store store){
         int news_id=store.getNews_id();
+        JpaUser temp=jpaUserrepository.findByUsername(store.getUsername()).orElse(null);
+        store.setUser_id(temp.getId());
         int user_id= store.getUser_id();
         if(getsinglestore(news_id,user_id)!=null){
             return null;
@@ -28,12 +35,12 @@ public class Storeservice {
         return repository.save(store);
     }
 
-    public List<Store> getstore(int user_id){
-        return repository.getstore(user_id);
+    public List<Store> getstore(String username){
+        return repository.getstore(username);
     }
     @Transactional
-    public String deleteallstore(int user_id){
-        repository.deleteallstore(user_id);
+    public String deleteallstore(String username){
+        repository.deleteallstore(username);
         return " All deleted ";
     }
 

@@ -1,4 +1,4 @@
-package com.example.news_springbootbackend.service;
+package com.example.news_springbootbackend.Security;
 
 import com.example.news_springbootbackend.entity.SecurityUser;
 import com.example.news_springbootbackend.respository.JpaUserrepository;

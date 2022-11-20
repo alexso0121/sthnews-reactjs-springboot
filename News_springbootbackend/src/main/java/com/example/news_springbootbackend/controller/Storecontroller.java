@@ -22,18 +22,18 @@ public class Storecontroller {
         return service.addstore(store);
     }
 
-    @GetMapping("/getstore/{user_id}")
-    public List<Store> getstore(@PathVariable int user_id){
-        return service.getstore(user_id);
+    @GetMapping("/getstore/{username}")
+    public List<Store> getstore(@PathVariable String username){
+        return service.getstore(username);
     }
-    @DeleteMapping("/deleteallstore/{user_id}")
-    public String deletestore(@PathVariable int user_id){
-        service.deleteallstore(user_id);
+    @DeleteMapping("/deleteallstore/{username}")
+    public String deletestore(@PathVariable String username){
+        service.deleteallstore(username);
         return "All stored news has been deleted";
     }
-    @DeleteMapping("/deletestore/{id}")
-    public String deletesinglestore(@PathVariable int id){
-        service.deletesinglestore(id);
+    @DeleteMapping("/deletestore/{user_id}")
+    public String deletesinglestore(@PathVariable int user_id){
+        service.deletesinglestore(user_id);
         return "The stored news has been deleted";
     }
 }
