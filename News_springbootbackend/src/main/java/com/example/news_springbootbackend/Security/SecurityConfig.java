@@ -25,6 +25,14 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+//main config for spring boot security
+/*
+ blocking the all access to the springboot server by springboot security except the url
+ for authentication page and shownews and articles.
+ the secured urls can only access by using the json web token (jwb)
+ the signup and token(login) urls can generate the token after authentication
+*/
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -35,32 +43,38 @@ public class SecurityConfig {
 
     boolean webSecurityDebug;
 
+    public SecurityConfig(JpaUserDetailsService myUserDetailsService, RsaKeyProp rsakeys) {
+        this.myUserDetailsService = myUserDetailsService;
+        this.rsakeys = rsakeys;
+    }
+
+    //adding the debug log file
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
         return web -> web.debug(webSecurityDebug);
     }
 
-    public SecurityConfig(JpaUserDetailsService myUserDetailsService, RsaKeyProp rsakeys) {
-        this.myUserDetailsService = myUserDetailsService;
-        this.rsakeys = rsakeys;
-    }
-    //@Override
-    //protected  boolean shouldNotFilter(HttpServletRequest request) throws SecurityException{
-
+    //main configuration bean for springboot security
+    //configuring method for accessing the springboot server
     @Bean
     public SecurityFilterChain securityfilterchain(HttpSecurity http) throws Exception {
         return http
-                //if used csrf.ignoringAntMatchers -->prevent the attack from cross-origin
-                //.csrf(csrf -> csrf.disable())
+               //allow cross-origin
                 .cors().and()
+                //allowing crsf with exception
                 .csrf(csrf -> csrf.ignoringAntMatchers("/shownews/**","/getnews/**","/token","/signup"))
 
+                //criteria for accessing the server
                 .authorizeRequests(auth-> auth
+                        //the urls that ignore by springboot security
                         .antMatchers("/shownews/**").permitAll()
                         .antMatchers("/getnews/**").permitAll()
                         .antMatchers("/signup").permitAll()
+
+                        //need to authenticate by bearer token (jwt)
                         .anyRequest().authenticated())
 
+                //enable the authentication by jwt
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 //Link to the jpauserservice to check whether the authentication valid (similar to authentication manager)
@@ -70,6 +84,7 @@ public class SecurityConfig {
                 //.formLogin().and()
                 .build();
     }
+    //allow the authentication manager to convert the entity model to authentication model for authentication
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig)  {
         try{System.out.println(authConfig.getAuthenticationManager());
@@ -79,21 +94,20 @@ public class SecurityConfig {
         }
     }
 
+    //configuration decoding the jwt
     @Bean
     JwtDecoder jwtDecoder(){
         return NimbusJwtDecoder.withPublicKey(rsakeys.publicKey()).build();
     }
-    //openssl genrsa -out keypair.pem 2048
-    // openssl rs -in keypair.pem -pubout -out public.pem
-    //openssl rsa -in keypair.pem -pubout -out public.pem
-    //openssl pkcs8 -topk -inform PEM -out -nocrypt -in keypair.pem -out private.pem
-    // openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in keypair.pem -out private.pem
+
+    //encode the jwt for generating token
     @Bean
     JwtEncoder jwtEncoder() {
         JWK jwk=new RSAKey.Builder(rsakeys.publicKey()).privateKey(rsakeys.privateKey()).build();
         JWKSource<SecurityContext> jwks=new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
     }
+    //encrypt the password before storing to the database
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -101,4 +115,10 @@ public class SecurityConfig {
 
 
 }
+//command line generating the asymmetrical keypairs for generating token
+/*openssl genrsa -out keypair.pem 2048
+openssl rs -in keypair.pem -pubout -out public.pem
+openssl rsa -in keypair.pem -pubout -out public.pem
+openssl pkcs8 -topk -inform PEM -out -nocrypt -in keypair.pem -out private.pem
+ openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in keypair.pem -out private.pem*/
 

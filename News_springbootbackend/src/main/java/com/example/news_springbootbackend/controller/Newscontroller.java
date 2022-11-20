@@ -30,7 +30,7 @@ public class Newscontroller {
     @GetMapping("/getnews/{id}")
     public News getnews(@PathVariable int id){
 
-            return service.getnews(id);
+            return service.getarticlebyid(id);
 
     }
 

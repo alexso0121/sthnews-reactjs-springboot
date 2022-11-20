@@ -24,17 +24,12 @@ public class Newsservice {
 
 
 
-    //scrap everyday news in bbc and store  it  the database
-    //get the link of the specific news
 
-
-
-
-
-//get method to get a list of news
+//get method to return a list of news base on the category
     public List<News>  getarticles(int category) {
         LocalDate today=LocalDate.now();
 
+        //get the news if today news not exist
         if(repository.getnewsbydate(today,category).size()==0){
            return repository.getnewsbydate(today.minusDays(1),category);
         }
@@ -45,25 +40,28 @@ public class Newsservice {
 
 
 
-    public List<News> gettitlenews(String title){
-        return repository.getsinglenews(title);
-    }
+ //   public List<News> gettitlenews(String title){
+  //      return repository.getsinglenews(title);
+    //}
+
 
     public News getarticlebyid(int news_id){
         return repository.findById(news_id).orElse(null);
     }
 
-    public News getnews(int id){
-        return repository.findById(id).orElse(null);
-    }
+   // public News getnews(int id){
+       // return repository.findById(id).orElse(null);
+   // }
 
 
+    //return  a list of news which match with the matched result
     public List<News> searchnews(String input) {
         ArrayList<String> titles=new ArrayList<String>();
         String modified_input="%"+input+"%";
         List<News> foundnews= repository.searchnews(modified_input);
         List<News> filternews=new ArrayList<News>();
         int num=0;
+        //check if the news repeated and return at most 8 news
         for(News news:foundnews){
             if(num==7){
                 break;

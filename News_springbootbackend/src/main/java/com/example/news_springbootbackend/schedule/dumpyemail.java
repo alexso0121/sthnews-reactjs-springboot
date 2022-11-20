@@ -9,6 +9,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 
+//send a dumpy email for every registered user every week
+
 @Configuration
 public class dumpyemail {
 
@@ -18,7 +20,7 @@ public class dumpyemail {
     @Autowired
     private Emailsender emailsender;
 
-    @Scheduled(fixedRate = 7*86400*1000L)
+    //@Scheduled(fixedRate = 7*86400*1000L)
     public void timeer(){
         System.out.println("Start dumpy");
         List<JpaUser> allusers = jpaUserrepository.getallUsers();
@@ -26,7 +28,8 @@ public class dumpyemail {
             emailsender.SendEmail(user.getEmail(),
                     "Just Dumpy ",
                     "Dear "+ user.getUsername()+":"+"\n"+"\n"+
-                            "Nothing! I just want to wake you if you havent!\n \n"+
+                            "NOTHING! I just want to faking wake you up if you are not!\n " +
+                            "@this email is automatically sent every week\n \n"+
                             "Best Regards,\n"+
                             "Sth coop.");
 

@@ -24,7 +24,7 @@ public class scrapschedular {
     @Autowired
     private Newsrepository repository;
 
-    //@Scheduled(cron="0 15 0 * * ?",zone = "Hongkong")
+
     //the timer for activating the function everyday
     //@Scheduled(fixedRate = 86400*1000L)
     public void timer(){

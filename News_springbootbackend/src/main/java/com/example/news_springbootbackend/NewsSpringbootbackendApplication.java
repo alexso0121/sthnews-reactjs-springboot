@@ -3,7 +3,7 @@ package com.example.news_springbootbackend;
 import com.example.news_springbootbackend.Security.RsaKeyProp;
 import com.example.news_springbootbackend.entity.JpaUser;
 import com.example.news_springbootbackend.respository.JpaUserrepository;
-import com.example.news_springbootbackend.respository.Userrepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.core.GrantedAuthority;
-import com.example.news_springbootbackend.entity.User;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;

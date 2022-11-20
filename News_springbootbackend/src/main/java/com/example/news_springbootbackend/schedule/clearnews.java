@@ -8,6 +8,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 
+//configuration class for cleaning news that are not stored and the news passed for 7 days
+
 @Configuration
 public class clearnews {
     @Autowired
