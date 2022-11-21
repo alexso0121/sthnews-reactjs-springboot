@@ -41,7 +41,7 @@ website: www.sosthweb.com
 
 
 # Springboot architecture
-main script for spring boot --> main ->springbootbackend --> src
+main script for spring boot --> springbootbackend --> src/main
 
 package schedular: springboot schedular
 
