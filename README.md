@@ -9,7 +9,7 @@ database: mysql
 
 cloud server: aws elastic bean + aws amplify
 
-frontend script: https://github.com/alexso0121/newsreact
+frontend script: https://github.com/alexso0121/sthnews-reactjs-springboot-frontend
 
 website: www.sosthweb.com
 
