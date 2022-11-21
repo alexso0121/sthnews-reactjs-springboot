@@ -29,7 +29,7 @@ website: www.sosthweb.com
 -personal profile
 
 # Version 2
--springboot security to protect the database being accessed 
+-springboot security to protect the database from being accessed 
 
 -json web token is used to allow authentication to backend server
 
@@ -38,6 +38,8 @@ website: www.sosthweb.com
 -send email to the client after sign up when valid
 
 -clear outdate news with springboot schedular
+
+-clear news after 7days
 
 # Springboot architecture
 main script for spring boot --> main ->springbootbackend --> src
