@@ -39,7 +39,6 @@ website: www.sosthweb.com
 
 -clear outdate news with springboot schedular
 
--clear news after 7days
 
 # Springboot architecture
 main script for spring boot --> main ->springbootbackend --> src
