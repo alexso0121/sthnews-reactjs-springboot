@@ -11,6 +11,7 @@ database: mysql
 
 cloud server: aws elastic bean + aws amilify
 
+frontend script: https://github.com/alexso0121/newsreact
 
 # Version 1
 -basic authentication
@@ -37,13 +38,15 @@ cloud server: aws elastic bean + aws amilify
 # Springboot architecture
 main script for spring boot --> main ->springbootbackend --> src
 
-package schedular: springboot schedlar
+package schedular: springboot schedular
 
 package model: all entities
 
 package service: all business logic
 
 package controller: all rest api
+
+package repository: sql query for accessing the mysql database
 
 package security: springboot security configuration
 
