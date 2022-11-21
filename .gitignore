@@ -1,3 +1,4 @@
 
 newsreact
 News_springbootbackend/src/main/resources/application.properties
+*.properties
