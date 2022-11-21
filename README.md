@@ -1,7 +1,7 @@
-# sthnews (news website)
+# sthnewsweb (news website)
 www.sosthweb.com
 
-month 3 project 
+month 3-4 project 
 
 frontend server: reactjs__javascript (with react bootstrap)
 
@@ -16,7 +16,7 @@ frontend script: https://github.com/alexso0121/newsreact
 # Version 1
 -basic authentication
 
--web scraping news every day (HKT 08:00) and store to the database in springboot scheduler
+-web scraping news (jsoup) every day (HKT 08:00) and store to the database by springboot scheduler
 
 -weather forecast by hk observation free api
 
