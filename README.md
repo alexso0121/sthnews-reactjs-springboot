@@ -1,6 +1,4 @@
 # sthnewsweb (news website)
-www.sosthweb.com
-
 month 3-4 project 
 
 frontend server: reactjs__javascript (with react bootstrap)
@@ -12,6 +10,8 @@ database: mysql
 cloud server: aws elastic bean + aws amilify
 
 frontend script: https://github.com/alexso0121/newsreact
+
+website: www.sosthweb.com
 
 # Version 1
 -basic authentication
