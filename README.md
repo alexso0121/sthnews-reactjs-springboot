@@ -5,7 +5,7 @@ month 3 project
 
 frontend server: reactjs__javascript (with react bootstrap)
 
-backend server: springboot_java
+backend server: springboot__java
 
 database: mysql
 
