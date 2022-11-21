@@ -12,6 +12,7 @@ cloud server: aws elastic bean + aws amplify
 frontend script: https://github.com/alexso0121/newsreact
 
 website: www.sosthweb.com
+(mainly designed based on mobile phone)
 
 # Version 1
 -basic authentication
