@@ -24,7 +24,9 @@ website: www.sosthweb.com
 
 -store news function after autheticate
 
--read history authentication after authenticate
+-read history function after authenticate
+
+-personal profile
 
 # Version 2
 -springboot security to protect the database being accessed 
