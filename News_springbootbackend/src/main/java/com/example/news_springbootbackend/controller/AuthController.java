@@ -6,9 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import org.slf4j.Logger;
 
-@CrossOrigin(origins = "http://localhost:3000")
+// mvn clean package  spring-boot:repackage
+import org.slf4j.Logger;
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://www.sosthweb.com/")
 @RestController
 public class AuthController {
     private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);

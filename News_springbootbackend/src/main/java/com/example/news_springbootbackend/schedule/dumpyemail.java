@@ -20,13 +20,13 @@ public class dumpyemail {
     @Autowired
     private Emailsender emailsender;
 
-    //@Scheduled(fixedRate = 7*86400*1000L)
+    @Scheduled(fixedRate = 6*86400*1000L)
     public void timeer(){
         System.out.println("Start dumpy");
         List<JpaUser> allusers = jpaUserrepository.getallUsers();
         for (JpaUser user:allusers){
             emailsender.SendEmail(user.getEmail(),
-                    "Just Dumpy ",
+                    "Just a Dump Email ",
                     "Dear "+ user.getUsername()+":"+"\n"+"\n"+
                             "NOTHING! I just want to faking wake you up if you are not!\n " +
                             "@this email is automatically sent every week\n \n"+

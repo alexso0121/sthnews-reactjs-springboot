@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "https://www.sosthweb.com/")
-@CrossOrigin(origins = "http://localhost:3000/")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://www.sosthweb.com/")
 public class Newscontroller {
     @Autowired
     private Newsservice service;

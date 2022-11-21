@@ -10,6 +10,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
@@ -75,5 +76,10 @@ public class Newsservice {
              num++;
         }
         return filternews;
+    }
+
+    @Transactional
+    public void cleannews(LocalDate minusDays) {
+        repository.cleannews(minusDays);
     }
 }

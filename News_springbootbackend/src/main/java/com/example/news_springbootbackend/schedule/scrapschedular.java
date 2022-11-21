@@ -26,7 +26,7 @@ public class scrapschedular {
 
 
     //the timer for activating the function everyday
-    //@Scheduled(fixedRate = 86400*1000L)
+    @Scheduled(fixedRate = 86400*1000L)
     public void timer(){
         System.out.println("Start scraping news");
         //LocalDateTime now=LocalDateTime.now();
