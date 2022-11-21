@@ -7,7 +7,7 @@ backend server: springboot__java
 
 database: mysql
 
-cloud server: aws elastic bean + aws amilify
+cloud server: aws elastic bean + aws amplify
 
 frontend script: https://github.com/alexso0121/newsreact
 
