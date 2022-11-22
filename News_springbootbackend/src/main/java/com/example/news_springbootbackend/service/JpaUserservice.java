@@ -85,12 +85,12 @@ public class JpaUserservice {
         emailsender.SendEmail(jpaUser.getEmail(),
                 "Successful Registration for STHNews ",
                 "Dear "+ jpaUser.getUsername()+":"+"\n"+"\n"+
-        "Congratulations!We are glad to notice that your have successfully registered to STH NEWS"+"\n"
-        +"Our website is a website for reading updated news and weathering forecast." +
-                        "Multiple function like store your own news," +
-                "watch for history can also be used after you have register.Feel free to contact us with this email\n \n"+
+        "Congratulations!We are pleased to notice that your have successfully registered to STH NEWS"+"\n"
+        +"Our website is a site for reading the latest news and weathering forecast." +
+                        "After registering,you can use several function such as saving your own news"+
+                "and viewing your history.Please feel free to contact us with this email\n \n"+
                 "Best Regards,\n"+
-                "Sth coop.");
+                "Sth coop.\n \n"+"(this email is contributed by Miss Kaitlyn)");
         //return the token
        return token;
 

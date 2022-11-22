@@ -29,8 +29,7 @@ public class scrapschedular {
     @Scheduled(fixedRate = 86400*1000L)
     public void timer(){
         System.out.println("Start scraping news");
-        //LocalDateTime now=LocalDateTime.now();
-        // LocalDate today=LocalDate.now();
+
         final String base_urls="https://www.bbc.com/news";
         ArrayList<String> urls=new ArrayList<String>(5);
 

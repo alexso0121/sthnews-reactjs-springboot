@@ -41,20 +41,14 @@ public class Newsservice {
 
 
 
- //   public List<News> gettitlenews(String title){
-  //      return repository.getsinglenews(title);
-    //}
+
 
 
     public News getarticlebyid(int news_id){
         return repository.findById(news_id).orElse(null);
     }
 
-   // public News getnews(int id){
-       // return repository.findById(id).orElse(null);
-   // }
-
-
+    //for search function
     //return  a list of news which match with the matched result
     public List<News> searchnews(String input) {
         ArrayList<String> titles=new ArrayList<String>();
@@ -80,6 +74,8 @@ public class Newsservice {
 
     @Transactional
     public void cleannews(LocalDate minusDays) {
-        repository.cleannews(minusDays);
+        List<News> outdatenews=repository.findoutdatenews(minusDays);
+        for(News news:outdatenews){
+        repository.cleannews(news.getId());}
     }
 }

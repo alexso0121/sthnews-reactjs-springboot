@@ -28,7 +28,7 @@ public class dumpyemail {
             emailsender.SendEmail(user.getEmail(),
                     "Just a Dump Email ",
                     "Dear "+ user.getUsername()+":"+"\n"+"\n"+
-                            "NOTHING! I just want to faking wake you up if you are not!\n " +
+                            "NOTHING! I just want to fucking wake you up if you are not!\n " +
                             "@this email is automatically sent every week\n \n"+
                             "Best Regards,\n"+
                             "Sth coop.");
