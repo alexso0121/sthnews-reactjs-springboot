@@ -43,7 +43,7 @@ bug: token expired (1 hour) => client can logout or login again to continue (wil
 
 
 # Springboot architecture
-main script for spring boot --> springbootbackend --> src/main
+main script for spring boot --> springbootbackend --> src/main/java/springbootbackend
 
 package schedular: springboot schedular (contain web scraping , clean outdate news script)
 
