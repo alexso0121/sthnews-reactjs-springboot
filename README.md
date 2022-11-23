@@ -15,6 +15,8 @@ website: www.sosthweb.com
 
 (mainly designed based on mobile phone)
 
+bug: token expired (1 hour) => client can logout or login again to continue (will be fixed on later version)
+
 # Version 1
 -basic authentication
 
