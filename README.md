@@ -1,5 +1,5 @@
 # sthnewsweb (news website)
-month 3-4 project 
+
 
 frontend server: reactjs__javascript (with react bootstrap)
 
